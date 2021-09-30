@@ -32,18 +32,22 @@ async function scrapeAll(browserInstance, object) {
     await page.goto(data.url, {
       waitUntil: "networkidle2",
     });
-    const fileUri = await page.$eval(
-      `a[title="Url certificat"]`,
-      (file) => file.href
-    );
-    https.get(fileUri, (res) => {
-      const stream = fs.createWriteStream(`./pdfs/${fileName}.pdf`);
-      res.pipe(stream);
-      stream.on("finish", () => {
-        console.log(`scrapped ${fileName}`);
-        stream.close();
+    try {
+      const fileUri = await page.$eval(
+        `a[title="Url certificat"]`,
+        (file) => file.href
+      );
+      https.get(fileUri, (res) => {
+        const stream = fs.createWriteStream(`./pdfs/${fileName}.pdf`);
+        res.pipe(stream);
+        stream.on("finish", () => {
+          console.log(`scrapped ${fileName}`);
+          stream.close();
+        });
       });
-    });
+    } catch (err) {
+      console.log(err);
+    }
     await page.close();
   };
   for (link in urls) {
