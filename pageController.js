@@ -13,6 +13,7 @@ async function scrapeAll(browserInstance, object) {
     parseInt(object[0]),
     parseInt(object[1])
   );
+  const crashedName = `crashed${object[0]}${object[1]}`;
   const urls = dataSpliced.map((url) => {
     return {
       url: url["Site web"],
@@ -21,6 +22,7 @@ async function scrapeAll(browserInstance, object) {
     };
   });
   browser = await browserInstance;
+  let crashedData = [];
   const pagePromise = async (data) => {
     const fileName = `${data.siren}-${data.name}`;
     console.log(`scrapping ${fileName}`);
@@ -46,13 +48,22 @@ async function scrapeAll(browserInstance, object) {
         });
       });
     } catch (err) {
+      crashedData.push(data);
       console.log(err);
     }
+
     await page.close();
   };
   for (link in urls) {
     await pagePromise(urls[link]);
   }
+  const stringCrashed = JSON.stringify(crashedData);
+  fs.writeFile(`./crash/${crashedName}.json`, stringCrashed, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log("JSON data is saved.");
+  });
 }
 
 module.exports = (browserInstance, object) =>
