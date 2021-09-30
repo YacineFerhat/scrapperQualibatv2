@@ -9,9 +9,7 @@ function csvJSON(csv) {
     const currentline = lines[i].match(/"[^"]*"|[^,]+/g);
 
     for (let j = 0; j < headers.length; j++) {
-      obj[headers[j].replace('"', "").replace('"', "")] = currentline[j]
-        .replace('"', "")
-        .replace('"', "");
+      obj[headers[j]?.replace('"','')?.replace('"','')] = currentline[j]?.replace('"','')?.replace('"','');
     }
     result.push(obj);
   }

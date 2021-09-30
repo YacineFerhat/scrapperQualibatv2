@@ -4,9 +4,13 @@ const port = 8080;
 const browserObject = require("./browser");
 const scraperController = require("./pageController");
 
-app.get("/upload", (req, res) => {
-  let browserInstance = browserObject.startBrowser();
-  scraperController(browserInstance);
+app.get("/upload/:object", (req, res) => {
+  const { object } = req.params;
+  const objectSplitted = object.split('_')
+  if (object !== undefined) {
+    let browserInstance = browserObject.startBrowser();
+    scraperController(browserInstance, objectSplitted);
+  }
 });
 
 app.listen(port, () => {
