@@ -24,7 +24,7 @@ async function scrapeAll(browserInstance, object) {
   browser = await browserInstance;
   let crashedData = [];
   const pagePromise = async (data) => {
-    const fileName = `${data.siren}-${data.name}`;
+    const fileName = `${data.siren}`;
     console.log(`scrapping ${fileName}`);
     const page = await browser.newPage();
     await page.waitForTimeout(1000);
