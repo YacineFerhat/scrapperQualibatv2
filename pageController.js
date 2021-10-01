@@ -49,6 +49,13 @@ async function scrapeAll(browserInstance, object) {
       });
     } catch (err) {
       crashedData.push(data);
+      const stringCrashed = JSON.stringify(crashedData);
+      fs.writeFile(`./crash/${crashedName}.json`, stringCrashed, (err) => {
+        if (err) {
+          throw err;
+        }
+        console.log("JSON data is saved.");
+      });
       console.log(err);
     }
 
@@ -57,13 +64,7 @@ async function scrapeAll(browserInstance, object) {
   for (link in urls) {
     await pagePromise(urls[link]);
   }
-  const stringCrashed = JSON.stringify(crashedData);
-  fs.writeFile(`./crash/${crashedName}.json`, stringCrashed, (err) => {
-    if (err) {
-      throw err;
-    }
-    console.log("JSON data is saved.");
-  });
+ 
 }
 
 module.exports = (browserInstance, object) =>
