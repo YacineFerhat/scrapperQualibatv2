@@ -13,7 +13,7 @@ async function scrapeAll(browserInstance, object) {
     parseInt(object[0]),
     parseInt(object[1])
   );
-  const crashedName = `crashed${object[0]}${object[1]}`;
+  const crashedName = `crashed${object[0]}_${object[1]}`;
   const urls = dataSpliced.map((url) => {
     return {
       url: url["Site web"],
