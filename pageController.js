@@ -23,6 +23,7 @@ async function scrapeAll(browserInstance, object) {
   });
   browser = await browserInstance;
   let crashedData = [];
+
   const pagePromise = async (data) => {
     const fileName = `${data.siren}`;
     console.log(`scrapping ${fileName}`);
@@ -35,10 +36,23 @@ async function scrapeAll(browserInstance, object) {
       waitUntil: "networkidle2",
     });
     try {
-      const fileUri = await page.$eval(
+      const nbrElements = await page.$$eval(
         `a[title="Url certificat"]`,
-        (file) => file.href
+        (element) => element.length
       );
+
+      let fileUri;
+      if (nbrElements > 1) {
+        fileUri = await page.$eval(
+          `.certificat-qualibat > p > a:nth-of-type(2)`,
+          (file) => file.href
+        );
+      } else {
+        fileUri = await page.$eval(
+          `a[title="Url certificat"]`,
+          (file) => file.href
+        );
+      }
       https.get(fileUri, (res) => {
         const stream = fs.createWriteStream(`./pdfs/${fileName}.pdf`);
         res.pipe(stream);
@@ -64,7 +78,6 @@ async function scrapeAll(browserInstance, object) {
   for (link in urls) {
     await pagePromise(urls[link]);
   }
- 
 }
 
 module.exports = (browserInstance, object) =>
