@@ -33,6 +33,15 @@ local.properties
 #
 android/app/release
 node_modules/
+failes/
+finaleResults/
+new/
+new1/
+results/
+test/
+tests/
+old/
+fails/
 npm-debug.log
 yarn-error.log
 # BUCK

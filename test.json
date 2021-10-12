@@ -1,0 +1,34 @@
+{
+    "numero":"E-E186422",
+    "validite":"08/02/2022",
+    "edition":"22/03/2021",
+    "date_creation":"01/06/2015",
+    "nom_entreprise":"S.M.S",
+    "forme_juridique":"SARL",
+    "capital":"50000",
+    "adresse":"6-8 AVENUE DE BOURGOGNE 95310 ST OOUEN L'AUMONE ",
+    "registre_commerce":"RC",
+    "telephone":"06 64 03 44 55",
+    "fax":"",
+    "siren":"811 936 012 00038",
+    "code_nace":"4120A",
+    "responsabilite_legale":"GHOBRIAL SHENOUDA GERANT",
+    "caisse_conges":"",
+    "assurance_travaux":"AXA FRANCE IARD 0000010658279804",
+    "assurance_civile":"AXA FRANCE IARD 0000010658279804",
+    "site_internet":"",
+    "situation_fiscale":"A jour au 31/12/2020",
+    "email":"sg.smsbatiment@gmail.com",
+    "effectif":"17",
+    "classification":"EFF2",
+    "chiffre_affaire":"813 787",
+    "tranche_classification":"CA3",
+    "qualification":[
+        {
+            "code":"1161",
+            "nom":"Travayx de curage",
+            "effectif":"16",
+            "date_attribution":"09/02/2021"
+        }
+    ]
+}
